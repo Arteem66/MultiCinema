@@ -32,19 +32,22 @@ async function GET_BEAST_FILMS(URL) {
 }
 
 function showBeastFilms(data) {
-	const beastFilmBox = document.querySelector('.kino-later-list')
-	const beastFilm = getRandomFilm(data.films, 1)
+	const beastFilmBox = document.querySelector('.popular-body')
+	const beastFilm = getRandomFilm(data.items, 1)
 
 	beastFilmBox.innerHTML = `
-    <img src='${beastFilm.posterUrlPreview}' class='later-img'
-    alt = '${beastFilm.nameRu}'>
-    <a href="https://www.kinopoisk.ru/film/${beastFilm.filmId}" class="button later-item-button">Посмотреть</a>
+    <img src='${beastFilm[0].posterUrl}' class='later-img'
+    alt = '${beastFilm[0].nameRu}'>
+    <a href="https://www.kinopoisk.ru/film/${beastFilm[0].filmId}" class="button later-item-button">Посмотреть</a>
   `
 }
 
 function showPopularFilms(data) {
 	const filmList = document.querySelector('.kino-later-list')
-	const threeFilms = getRandomFilm(data.films, 3)
+	const threeFilms = getRandomFilm(data.items, 3)
+
+	console.log(threeFilms);
+	
 
 	threeFilms.forEach(item => {
 		const filmItem = document.createElement('li')
@@ -52,7 +55,7 @@ function showPopularFilms(data) {
 		filmItem.innerHTML = `
           <img src='${item.posterUrlPreview}' class='later-img'
           alt = '${item.nameRu}'>
-          <a href="https://www.kinopoisk.ru/film/${item.filmId}" class="button later-item-button">Посмотреть</a>`
+          <a href="https://www.kinopoisk.ru/film/${item.kinopoiskId}" class="button later-item-button">Посмотреть</a>`
 		filmList.appendChild(filmItem)
 	})
 }
